@@ -6,8 +6,6 @@ resource "aws_lambda_function" "glue_failure_notification" {
   filename      = var.lambda_filename
   timeout       = 60
 
-  # Si no utilizas VPC, puedes eliminar esta configuración
-  # Si tu Lambda debe acceder a Glue o S3 en una VPC, configura estos valores.
 #   vpc_config {
 #     subnet_ids         = var.lambda_subnet_ids
 #     security_group_ids = [aws_security_group.lambda_security_group.id]
