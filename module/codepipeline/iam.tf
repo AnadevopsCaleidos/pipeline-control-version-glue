@@ -48,6 +48,7 @@ resource "aws_iam_role" "codepipeline_role" {
     ]
   })
 }
+
 resource "aws_iam_role_policy" "codepipeline_policy" {
   name = "CodePipelineS3AccessPolicy"
   role = aws_iam_role.codepipeline_role.id

@@ -1,70 +1,3 @@
-variable "notification_email" {
-  description = "Email address to receive notifications"
-  type        = string
-}
-variable "name_notification_sns" {
-  description = ""
-  type        = string
-}
-variable "lambda_name" {
-  description = "Nombre de la función Lambda"
-  type        = string
-}
-
-
-variable "lambda_filename" {
-  description = "Path to the Lambda deployment package"
-  type        = string
-}
-variable "additional_permissions" {
-  description = "Permisos adicionales para la función Lambda (opcional)"
-  type        = list(object({
-    action   = string
-    resource = string
-  }))
-  default = []
-}
-
-
-variable "event_rule_name" {
-  description = "Nombre de la regla de EventBridge"
-  type        = string
-}
-
-variable "glue_job_pattern" {
-  description = "Patrón de evento para detectar fallos en trabajos de AWS Glue"
-  type        = string
-}
-
-variable "name" {
-  description = "Name for CodeBuild build project"
-  type        = string
-  default = ""
-}
-variable "artifact_bucket_name" {
-  description = "Nombre del bucket S3 para artefactos del pipeline"
-  type        = string
-  default = ""
-}
-
-variable "RepositoryName" {
-  description = "Nombre del repositorio GitHub"
-  type        = string
-  default = ""
-}
-
-variable "BranchName" {
-  description = "Rama del repositorio GitHub"
-  type        = string
-  default = ""
-}
-variable "github_token" {
-  description = "OAuth token for GitHub access"
-  type        = string
-  sensitive   = true
-  default = ""
-}
-
 ### ec2 alerts ###
 
 variable "ec2_instance_id" {
@@ -207,4 +140,3 @@ variable "memory_alarm_description" {
   type        = string
   default     = "Alarma cuando el uso de la memoria excede."
 }
-
