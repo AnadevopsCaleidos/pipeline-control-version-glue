@@ -22,8 +22,10 @@ resource "aws_codepipeline" "glue_pipeline" {
       version  = "1"
       
       configuration = {
-        RepositoryName   = var.RepositoryName
-        BranchName = var.BranchName
+        Owner  = "AnadevopsCaleidos"
+        Repo   = var.RepositoryName
+        Branch = var.BranchName
+        OAuthToken           = var.github_token
         PollForSourceChanges = "true"
       }
       output_artifacts = ["source_output"]

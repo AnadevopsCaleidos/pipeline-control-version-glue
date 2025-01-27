@@ -1,4 +1,13 @@
 
+module "pipeline-update" {
+    source = "./module/codepipeline" 
+    name = var.name
+    artifact_bucket_name = var.artifact_bucket_name
+    RepositoryName = var.RepositoryName
+    BranchName = var.BranchName
+    github_token = var.github_token
+}
+
 module "notification-glue" {
   source                = "./module/notification-glue"
   name_notification_sns = var.name_notification_sns
@@ -52,5 +61,4 @@ module "alerts-ec2"{
 }
 
 data "aws_caller_identity" "current" {}
-
 

@@ -1,4 +1,3 @@
-
 variable "notification_email" {
   description = "Email address to receive notifications"
   type        = string
@@ -208,3 +207,4 @@ variable "memory_alarm_description" {
   type        = string
   default     = "Alarma cuando el uso de la memoria excede."
 }
+
