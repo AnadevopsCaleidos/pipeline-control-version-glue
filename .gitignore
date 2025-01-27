@@ -7,3 +7,5 @@
 # Terraform state files
 terraform.tfstate
 terraform.tfstate.backup
+.github_token
+.sns_topic_arn
