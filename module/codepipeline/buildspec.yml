@@ -1,0 +1,41 @@
+version: 0.2
+
+phases:
+  install:
+    runtime-versions:
+      python: 3.x
+  build:
+    commands:
+      - echo "Iniciando sincronización de scripts y actualización de Glue Jobs..."
+      - echo "Scripts descargados desde GitHub."
+
+      # Obtener todos los Glue Jobs existentes
+      - jobs=$(aws glue list-jobs --query 'JobNames[*]' --output text)
+
+      # Iterar sobre cada Glue Job
+      - |
+        for job in $jobs; do
+          # Obtener la ubicación del script asociado al Glue Job
+          script_location=$(aws glue get-job --job-name "$job" --query 'Job.Command.ScriptLocation' --output text)
+
+          # Extraer el bucket y la ruta del script en S3
+          bucket=$(echo "$script_location" | cut -d'/' -f3)
+          key=$(echo "$script_location" | cut -d'/' -f4-)
+
+          # Sincronizar los scripts locales con el bucket S3
+          echo "Sincronizando el script $key al bucket $bucket..."
+          aws s3 sync ./scripts/ "s3://$bucket/"
+
+          # Verificar si hay cambios en el script y actualizar el Glue Job
+          new_script_location="s3://$bucket/$key"
+          if [ "$script_location" != "$new_script_location" ]; then
+            echo "Actualizando Glue Job $job con script $new_script_location..."
+            aws glue update-job --job-name "$job" --job-update Command={Name="glueetl",ScriptLocation="$new_script_location"}
+            
+            # Iniciar el Glue Job después de la actualización
+            echo "Iniciando el Glue Job $job..."
+            aws glue start-job-run --job-name "$job"
+          fi
+        done
+
+      - echo "Actualización de Glue Jobs completada."

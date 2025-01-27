@@ -1,0 +1,5 @@
+name = "pipeline-update"
+artifact_bucket_name = "etl-scripts-bucket-test"
+RepositoryName = "test-jobs-glue"
+BranchName = "main"
+github_token = "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"
