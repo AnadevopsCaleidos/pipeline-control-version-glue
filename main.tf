@@ -1,11 +1,21 @@
 
-module "pipeline-update" {
-    source = "./module/codepipeline" 
-    name = var.name
-    artifact_bucket_name = var.artifact_bucket_name
-    RepositoryName = var.RepositoryName
-    BranchName = var.BranchName
-    github_token = var.github_token
+module "pipeline-update"{
+  source               = "./module/codepipeline"
+  name                 = var.name
+  artifact_bucket_name = var.artifact_bucket_name
+  RepositoryName       = var.RepositoryName
+  BranchName           = var.BranchName
+  github_token         = data.aws_secretsmanager_secret_version.github_token.secret_string
+  name_iam_codebuild = var.name_iam_codebuild
+  name_iam_policy_codebuild= var.name_iam_policy_codebuild
+  name_iam_codepipeline = var.name_iam_codepipeline
+  name_iam_policy_codepipeline= var.name_iam_policy_codepipeline
+
+
+}
+
+data "aws_secretsmanager_secret_version" "github_token" {
+  secret_id = "control-version/glue-jobs"
 }
 
 module "notification-glue" {
@@ -17,17 +27,6 @@ module "notification-glue" {
   event_rule_name  = var.event_rule_name
   glue_job_pattern = var.glue_job_pattern
 }
-
-
-# module "pipeline-update" {
-#     source = "./module/codepipeline" 
-#     name = var.name
-#     artifact_bucket_name = var.artifact_bucket_name
-#     RepositoryName = var.RepositoryName
-#     BranchName = var.BranchName
-#     github_token = var.github_token 
-# }
-
 
 module "alerts-ec2"{
     source = "./module/alerts"

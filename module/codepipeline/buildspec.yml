@@ -10,7 +10,7 @@ phases:
       - echo "Scripts descargados desde GitHub."
 
       # Obtener todos los Glue Jobs existentes
-      - jobs=$(aws glue list-jobs --query 'JobNames[*]' --output text)
+      - jobs=$(aws glue list-jobs --query 'JobNames[*]' --output text --debug)
 
       # Iterar sobre cada Glue Job
       - |

@@ -1,4 +1,4 @@
-resource "aws_codebuild_project" "glue_update" {
+resource "aws_codebuild_project" "glue_update"{
   name          = var.name
   service_role  = aws_iam_role.codebuild_role.arn
   source {

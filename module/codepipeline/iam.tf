@@ -1,22 +1,20 @@
 resource "aws_iam_role" "codebuild_role" {
-  name               = "CodeBuildServiceRole"
+  name               = var.name_iam_codebuild
   assume_role_policy = jsonencode({
     Version = "2012-10-17"
     Statement = [
       {
-        Effect = "Allow"
-        Principal = {
-          Service = "codebuild.amazonaws.com"
-        }
-        Action = "sts:AssumeRole"
-      },
+      Effect = "Allow"
+      Principal = { Service = "codebuild.amazonaws.com" }
+      Action = "sts:AssumeRole"
+    }
     ]
   })
 }
 
-resource "aws_iam_role_policy" "codebuild_policy" {
-  name   = "CodeBuildPolicy"
-  role   = aws_iam_role.codebuild_role.id
+resource "aws_iam_policy" "codebuild_policy" {
+  name   = var.name_iam_policy_codebuild
+  
   policy = jsonencode({
     Version = "2012-10-17"
     Statement = [
@@ -29,13 +27,32 @@ resource "aws_iam_role_policy" "codebuild_policy" {
         ]
         Resource = "*"
       },
+      {
+        Effect   = "Allow"
+        Action   = [
+          "glue:ListJobs",
+          "glue:GetJob",
+          "glue:UpdateJob",
+          "glue:StartJobRun"
+        ]
+        Resource = "*"
+      },
+      {
+        Effect   = "Allow"
+        Action   = [
+          "logs:CreateLogGroup",
+          "logs:CreateLogStream",
+          "logs:PutLogEvents"
+        ]
+        Resource = "*"
+      }
     ]
   })
 }
 
 # IAM Role para CodePipeline
 resource "aws_iam_role" "codepipeline_role" {
-  name = "CodePipelineServiceRole"
+  name = var.name_iam_codepipeline
 
   assume_role_policy = jsonencode({
     Version = "2012-10-17"
@@ -49,9 +66,9 @@ resource "aws_iam_role" "codepipeline_role" {
   })
 }
 
-resource "aws_iam_role_policy" "codepipeline_policy" {
-  name = "CodePipelineS3AccessPolicy"
-  role = aws_iam_role.codepipeline_role.id
+resource "aws_iam_policy" "codepipeline_policy" {
+  name = var.name_iam_policy_codepipeline
+  
 
   policy = jsonencode({
     Version = "2012-10-17"
@@ -92,3 +109,13 @@ resource "aws_iam_role_policy" "codepipeline_policy" {
     ]
   })
 }
+
+resource "aws_iam_role_policy_attachment" "codebuild_policy_attachment" {
+  role       = aws_iam_role.codebuild_role.name
+  policy_arn = aws_iam_policy.codebuild_policy.arn
+}
+resource "aws_iam_role_policy_attachment" "codepipeline_policy_attachmen_3" {
+  role       = aws_iam_role.codepipeline_role.name
+  policy_arn = aws_iam_policy.codepipeline_policy.arn
+}
+

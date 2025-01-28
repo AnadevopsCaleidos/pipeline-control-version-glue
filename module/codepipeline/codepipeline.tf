@@ -26,7 +26,6 @@ resource "aws_codepipeline" "glue_pipeline" {
         Repo   = var.RepositoryName
         Branch = var.BranchName
         OAuthToken           = var.github_token
-        PollForSourceChanges = "true"
       }
       output_artifacts = ["source_output"]
     }
@@ -36,7 +35,7 @@ resource "aws_codepipeline" "glue_pipeline" {
     name = "Build"
 
     action {
-      name             = "CodeBuild"
+      name     = "CodeBuild"
       category = "Build"
       owner    = "AWS"
       provider = "CodeBuild"
