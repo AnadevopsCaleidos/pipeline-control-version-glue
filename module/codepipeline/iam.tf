@@ -45,7 +45,14 @@ resource "aws_iam_policy" "codebuild_policy" {
           "logs:PutLogEvents"
         ]
         Resource = "*"
-      }
+      },
+      {
+            "Effect": "Allow",
+            "Action": [
+                "codeconnections:UseConnection"
+            ],
+            "Resource": "arn:aws:codeconnections:us-east-1:176415538763:connection/71814bf2-01c7-4c36-9674-5ae32766485f"
+        }
     ]
   })
 }
