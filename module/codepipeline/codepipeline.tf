@@ -1,3 +1,4 @@
+
 resource "aws_s3_bucket" "codepipeline_bucket" {
   bucket = "glue-job-sync-artifacts"
 }
@@ -22,9 +23,9 @@ resource "aws_codepipeline" "glue_pipeline" {
       version  = "1"
       
       configuration = {
-        Owner  = "AnadevopsCaleidos"
-        Repo   = var.RepositoryName
-        Branch = var.BranchName
+        Owner                = "AnadevopsCaleidos"
+        Repo                 = var.RepositoryName
+        Branch               = var.BranchName
         OAuthToken           = var.github_token
       }
       output_artifacts = ["source_output"]

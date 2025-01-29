@@ -105,8 +105,8 @@ resource "aws_iam_policy" "codepipeline_policy" {
           "logs:*"
         ]
         Resource = "*"
-      }
-    ]
+      },
+  ]
   })
 }
 
