@@ -2,4 +2,10 @@ name = "pipeline-update"
 artifact_bucket_name = "etl-scripts-bucket-test"
 RepositoryName = "test-jobs-glue"
 BranchName = "main"
-github_token = "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"
+github_token = ""
+name_iam_codebuild = "codebuild_iam"
+name_iam_policy_codebuild= "codebuild_policy"
+name_iam_codepipeline = "codepipeline_iam"
+name_iam_policy_codepipeline= "codepipeline_policy"
+
+
