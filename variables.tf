@@ -52,15 +52,19 @@ variable "artifact_bucket_name" {
   type        = string
   default     = ""
 }
+variable "Owner" {
+  description = "Name for repository owner"
+  type        = string
+}
 
 variable "RepositoryName" {
-  description = "Nombre del repositorio GitHub"
+  description = "Name for GitHub repository"
   type        = string
   default     = ""
 }
 
 variable "BranchName" {
-  description = "Rama del repositorio GitHub"
+  description = "Name for GitHub repository Branch"
   type        = string
   default     = ""
 }

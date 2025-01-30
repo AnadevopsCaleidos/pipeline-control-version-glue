@@ -49,7 +49,14 @@ resource "aws_iam_policy" "codebuild_policy" {
       {
             "Effect": "Allow",
             "Action": [
-                "codeconnections:UseConnection"
+                "codeconnections:CreateConnection",
+                "codeconnections:DeleteConnection",
+                "codeconnections:UseConnection",
+                "codeconnections:GetConnection",
+                "codeconnections:ListConnections",
+                "codeconnections:TagResource",
+                "codeconnections:ListTagsForResource",
+                "codeconnections:UntagResource"
             ],
             "Resource": "arn:aws:codeconnections:us-east-1:176415538763:connection/71814bf2-01c7-4c36-9674-5ae32766485f"
         }

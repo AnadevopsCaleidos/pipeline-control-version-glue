@@ -3,17 +3,22 @@ variable "name" {
   type        = string
 }
 variable "artifact_bucket_name" {
-  description = "Nombre del bucket S3 para artefactos del pipeline"
+  description = "Nombre for artifact bucket"
+  type        = string
+}
+
+variable "Owner" {
+  description = "Name for repository owner"
   type        = string
 }
 
 variable "RepositoryName" {
-  description = "Nombre del repositorio GitHub"
+  description = "Name for GitHub repository"
   type        = string
 }
 
 variable "BranchName" {
-  description = "Rama del repositorio GitHub"
+  description = "Name for GitHub repository Branch"
   type        = string
 }
 variable "github_token" {
@@ -22,22 +27,22 @@ variable "github_token" {
   sensitive   = true
 }
 variable "name_iam_codebuild"{
-  description = "OAuth token for GitHub access"
+  description = "Name for iam codebuild"
   type        = string
   sensitive   = true
 }
 variable "name_iam_policy_codebuild"{
-  description = "OAuth token for GitHub access"
+  description = "Name for iam policy codebuild"
   type        = string
   sensitive   = true
 }
 variable "name_iam_codepipeline"{
-  description = "OAuth token for GitHub access"
+  description = "Name for iam codepipeline"
   type        = string
   sensitive   = true
 }
 variable "name_iam_policy_codepipeline"{
-  description = "OAuth token for GitHub access"
+  description = "Name for iam policy codepipeline"
   type        = string
   sensitive   = true
 }
