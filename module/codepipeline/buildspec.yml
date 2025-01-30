@@ -22,9 +22,12 @@ phases:
           bucket=$(echo "$script_location" | cut -d'/' -f3)
           key=$(echo "$script_location" | cut -d'/' -f4-)
 
+          # Extraer carpeta del script
+          script_folder=$(echo "$script_location" | cut -d'/' -f4)
+
           # Sincronizar los scripts locales con el bucket S3
           echo "Sincronizando el script $key al bucket $bucket..."
-          aws s3 sync ./scripts/ "s3://$bucket/"
+          aws s3 sync $job "s3://$bucket/$script_folder"
 
           # Verificar si hay cambios en el script y actualizar el Glue Job
           new_script_location="s3://$bucket/$key"
