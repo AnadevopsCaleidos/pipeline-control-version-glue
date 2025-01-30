@@ -1,5 +1,6 @@
 name = "pipeline-update"
 artifact_bucket_name = "etl-scripts-bucket-test"
+Owner = "AnadevopsCaleidos"
 RepositoryName = "test-jobs-glue"
 BranchName = "main"
 github_token = ""

@@ -3,6 +3,7 @@ module "pipeline-update"{
   source               = "./module/codepipeline"
   name                 = var.name
   artifact_bucket_name = var.artifact_bucket_name
+  Owner                = var.Owner
   RepositoryName       = var.RepositoryName
   BranchName           = var.BranchName
   github_token         = data.aws_secretsmanager_secret_version.github_token.secret_string

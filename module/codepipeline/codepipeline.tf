@@ -23,7 +23,7 @@ resource "aws_codepipeline" "glue_pipeline" {
       version  = "1"
       
       configuration = {
-        Owner                = "AnadevopsCaleidos"
+        Owner                = var.Owner
         Repo                 = var.RepositoryName
         Branch               = var.BranchName
         OAuthToken           = var.github_token
